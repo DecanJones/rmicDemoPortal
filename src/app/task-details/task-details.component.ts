@@ -8,15 +8,18 @@ const confirmPassword = new FormControl('', CustomValidators.equalTo(password));
 
 @Component({
   selector: 'app-starter',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './task-details.component.html',
+  styleUrls: ['./task-details.component.scss']
 })
 
 
 
-export class DashboardComponent  {
+export class TaskDetailsComponent  {
   public form: FormGroup = Object.create(null);
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    //nav hack
+    document.getElementById("navMenu")?.click();
+  }
 
   constructor(private fb: FormBuilder){}
 

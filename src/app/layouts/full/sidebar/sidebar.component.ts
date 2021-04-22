@@ -17,6 +17,8 @@ import { SharedService } from 'src/app/shared-services';
 export class AppSidebarComponent implements OnDestroy {
   public config: PerfectScrollbarConfigInterface = {};
   public stepperSteps:any
+  public workflow:any
+  public setClasses = new Set();
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;
@@ -40,12 +42,19 @@ export class AppSidebarComponent implements OnDestroy {
     });
   }
 
+
+
+
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public menuItems: MenuItems,
     private sharedService: SharedService,
   ) {
+    this.sharedService.changedEmittedWorkflow$.subscribe(workflow => {
+      this.workflow = workflow;
+    })
+
     this.sharedService.changedEmitted$.subscribe(steps => {
       this.stepperSteps = steps;
     })

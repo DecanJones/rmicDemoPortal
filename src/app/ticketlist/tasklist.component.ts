@@ -171,18 +171,22 @@ export class TasklistComponent implements OnInit {
     sideBarOPen:boolean = false;
     displayedColumns: string[] = ['creator', 'title', 'assignee', 'status', 'product', 'date', 'action'];
     workflow:any[] = [ {
-        workflow: 1,
+        workflow: "workflow #1",
+        style: "bg-info",
         taskSteps:["file upload", "project description", "additional comments"]
     },
     {
-        workflow: 2,
+        workflow: "workflow #2",
+        style: "bg-warning",
         taskSteps:["file upload", "project description", "additional comments"]
     },{
-        workflow: 3,
+        workflow: "workflow #3",
+        style: "bg-success",
         taskSteps:["project description", "additional comments"]
     },
     {
-        workflow: 4,
+        workflow: "workflow #4",
+        style: "bg-danger",
         taskSteps:["file upload"]
     }
 ]
@@ -193,17 +197,17 @@ export class TasklistComponent implements OnInit {
 
     ngOnInit() {
         this.totalCount = this.dataSource.data.length;
-
-        this.Open = this.btnCategoryClick('Open');
-        this.Closed = this.btnCategoryClick('Closed');
-        this.Inprogress = this.btnCategoryClick('In Progress');
+        document.getElementById("navMenu")?.click()
+        this.Open = this.btnCategoryClick('Open',1);
+        this.Closed = this.btnCategoryClick('Closed',2);
+        this.Inprogress = this.btnCategoryClick('In Progress',3);
         this.dataSource = new MatTableDataSource(tickets);
         
     }
 
-    clickMe(any:any){
-        document.getElementById("navMenu")?.click()
-            
+    clickMe(any:any,num:number){
+       
+        this.sharedService.emitChangeWorkflow(this.workflow[num])    
         switch (any) {
             case 'Open':
                 this.sharedService.emitChange(this.workflow[0].taskSteps)
@@ -227,9 +231,9 @@ export class TasklistComponent implements OnInit {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
-    btnCategoryClick(val: string) {
+    btnCategoryClick(val: string, num:number) {
         this.dataSource.filter = val.trim().toLowerCase();
-       this.clickMe(val);
+       this.clickMe(val, num);
         return this.dataSource.filteredData.length;
         
     }

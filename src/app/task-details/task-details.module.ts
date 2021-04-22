@@ -3,8 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DemoMaterialModule } from '../demo-material-module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { DashboardComponent } from './dashboard.component';
-import { StarterRoutes } from './dashboard.routing';
+import { TaskDetailsComponent } from './task-details.component';
+import { StarterRoutes } from './task-details.routing';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
@@ -20,6 +20,6 @@ import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
     ReactiveFormsModule,
     RouterModule.forChild(StarterRoutes)
   ],
-  declarations: [DashboardComponent]
+  declarations: [TaskDetailsComponent]
 })
 export class StarterModule {}

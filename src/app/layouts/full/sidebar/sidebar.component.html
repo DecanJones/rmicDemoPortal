@@ -3,16 +3,17 @@
 <!-- ============================================================== -->
 <div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;">
     <!-- User profile image -->
-    <!-- <div class="profile-img">
-        <img src="assets/images/users/profile.png" alt="user"> </div> -->
-    <!-- User profile text-->
+    <div class="box p-20  text-center cursor-pointer" [ngClass]="workflow.style">
+        <h4 class="font-light text-white m-0">{{workflow.workflow}}</h4>
+                    <h6 class="text-white m-0">{{workflow.taskSteps.length}} tasks</h6> </div>
+    <!-- User profile text -->
     <!-- ============================================================== -->
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
-    <div class="profile-text">
-        <a [matMenuTriggerFor]="sdprofile" class=""> Marquis Palmer
+    <div class="box p-20  text-center cursor-pointer" [ngClass]="workflow.style">
+        <!-- <a [matMenuTriggerFor]="sdprofile" class=""> Marquis Palmer
             <i class="ti-angle-down font-12 m-l-5"></i>
-        </a>
+        </a> -->
     </div>
     <mat-menu #sdprofile="matMenu" class="mymegamenu">
         <button mat-menu-item>

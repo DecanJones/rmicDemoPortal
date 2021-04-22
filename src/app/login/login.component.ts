@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   check(uname: string, p: string) {
     const output = this.service.checkusernameandpassword(uname, p);
     if (output == true) {
-      this.routes.navigate(['/ticketlist']);
+      this.routes.navigate(['/tasklist']);
     } else {  
       this.msg = 'Invalid Username or Password';
     }

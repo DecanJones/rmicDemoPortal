@@ -23,10 +23,10 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'taskdetails',
-                loadChildren: () => import('./dashboard/dashboard.module').then(m => m.StarterModule)
+                loadChildren: () => import('./task-details/task-details.module').then(m => m.StarterModule)
             },
             {
-                path: 'ticketlist',
+                path: 'tasklist',
                 component: TasklistComponent,
                 data: {
                     title: 'Task List',
