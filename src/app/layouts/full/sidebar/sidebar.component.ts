@@ -42,7 +42,10 @@ export class AppSidebarComponent implements OnDestroy {
     });
   }
 
-
+  clickEvent(any:any){
+    this.sharedService.emitChangeTask(any)
+  
+  }
 
 
   constructor(
@@ -58,6 +61,8 @@ export class AppSidebarComponent implements OnDestroy {
     this.sharedService.changedEmitted$.subscribe(steps => {
       this.stepperSteps = steps;
     })
+
+  
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation

@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
@@ -23,12 +23,15 @@ import { TasklistComponent } from './ticketlist/tasklist.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
+import { NgxContentLoadingModule } from 'ngx-content-loading';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { QuillModule } from "ngx-quill";
 import { SharedService } from './shared-services';
-
+import { TextEditorComponent } from '../text-editor/text-editor.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -51,18 +54,25 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppSidebarComponent,
     LoginComponent,
     TasklistComponent,
-    AppBreadcrumbComponent
+    AppBreadcrumbComponent,
+    TextEditorComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     DemoMaterialModule,
+    UploaderModule,
     FormsModule,
+    ReactiveFormsModule ,
+    NgxContentLoadingModule,
     FlexLayoutModule,
     CalendarModule,
     PerfectScrollbarModule,
+    QuillModule.forRoot(),
     HttpClientModule,
     SharedModule,
+    
     RouterModule.forRoot(AppRoutes),
 
     HttpClientModule,

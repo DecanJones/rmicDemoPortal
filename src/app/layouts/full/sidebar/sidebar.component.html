@@ -33,7 +33,9 @@
  
 <mat-nav-list appAccordion>
     <mat-vertical-stepper #stepper>
-        <mat-step  *ngFor="let activity of stepperSteps" label="{{activity}}"></mat-step>
+        <mat-step  *ngFor="let activity of stepperSteps;let i = index"  label="{{activity}}" >
+            <button (click)="clickEvent(i)"></button>
+        </mat-step>
         <!-- <mat-step label="Upload document">
           {{stepperSteps}}
           </mat-step>

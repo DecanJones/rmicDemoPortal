@@ -57,11 +57,11 @@
               <div fxLayout="row wrap" class="align-items-center">
                 <div fxFlex.gt-md="25" fxFlex.gt-lg="25" fxFlex="100">
                   <mat-form-field>
-                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Tickets">
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Tasks">
                   </mat-form-field>
                 </div>
                 <div fxFlex.gt-md="75" class="text-right">
-                  <button mat-raised-button (click)="openDialog('Add',{})" color="primary">Add Ticket</button>
+                  <!-- <button mat-raised-button (click)="openDialog('Add',{})" color="primary">Add Ticket</button> -->
                 </div>
               </div>
             </mat-card-content>
@@ -137,40 +137,31 @@
           </mat-card-content>
       </mat-card> -->
   </div>
-  <div fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100" fxFlex="100">
+  <div fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="70" fxFlex="70">
       <mat-card>
           <mat-card-content>
-              <h4 class="card-title">Calendar</h4>
+            <mat-card-title>Calendar</mat-card-title>
           </mat-card-content>
           <mat-card-content class="bg-light">
               <ejs-calendar></ejs-calendar>
           </mat-card-content>
-          <mat-card-content>
-              <h5 class="p-t-20 m-b-5">RSS feed area</h5>
-              
-              <br/>
-              <button mat-raised-button class="m-t-20 m-r-5" color="primary">Update</button>
-          </mat-card-content>
+       
       </mat-card>
       <mat-card>
-          <mat-card-content class="text-center">
-              <h4 class="card-title">Sample Area</h4>
-              <div class="profile-pic m-b-20 m-t-20">
-                  <img src="" width="150" class="rounded-circle" alt="user">
-                  <h4 class="m-t-20 m-b-0"></h4>
-                  <a href="mailto:"></a>
-              </div>
-              
-          </mat-card-content>
+        
           
       </mat-card>
       <mat-card>
-          <mat-card-content>
-              <h4 class="card-title"></h4>another sample area
-              <div id="ticket-chart">
-         
-              </div>
-          </mat-card-content>
+        <mat-card-content>
+          <mat-card-title>RSS Feed</mat-card-title>
+          <mat-card-subtitle>A selection of cool informative links</mat-card-subtitle>
+          <mat-list>
+            <mat-list-item *ngFor="let message of messages">
+              <h3 matLine>{{message.from}}</h3>
+              <p matLine class="text-muted">{{message.content}}</p>
+            </mat-list-item>
+          </mat-list>
+      </mat-card-content>
       </mat-card>
   </div>
 </div>

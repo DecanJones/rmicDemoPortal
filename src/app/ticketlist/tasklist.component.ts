@@ -20,7 +20,7 @@ const tickets: TicketElement[] = [
     {
         id: 77,
         creator: 'Eric Pratt',
-        title: 'Elegant Theme Side Menu show OnClick',
+        title: ' File upload ,Elegant Theme Side Menu show OnClick',
         assignee: 'Alice Bohr',
         status: 'In Progress',
         labelbg: 'warning',
@@ -169,6 +169,27 @@ export class TasklistComponent implements OnInit {
     Inprogress = -1;
     Open = -1;
     sideBarOPen:boolean = false;
+    messages = [
+        {
+          from: 'Nirav joshi (nbj@gmail.com)',
+          image: 'assets/images/users/1.jpg',
+          subject: 'Material angular',
+          content: 'This is the material angular template'
+        },
+        {
+          from: 'Sunil joshi (sbj@gmail.com)',
+          image: 'assets/images/users/2.jpg',
+          subject: 'Wrappixel',
+          content: 'We have wrappixel launched'
+        },
+        {
+          from: 'Vishal Bhatt (bht@gmail.com)',
+          image: 'assets/images/users/3.jpg',
+          subject: 'Task list',
+          content: 'This is the latest task hasbeen done'
+        }
+      ];
+    
     displayedColumns: string[] = ['creator', 'title', 'assignee', 'status', 'product', 'date', 'action'];
     workflow:any[] = [ {
         workflow: "workflow #1",

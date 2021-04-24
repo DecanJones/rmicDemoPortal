@@ -39,12 +39,7 @@ export class FullComponent implements OnDestroy {
   private _mobileQueryListener: () => void;
 
   clickEvent() {
-    this.status = !this.status;
-    $(document).ready(function(){
-          
-      $("snav").toggle();
- 
-  });
+
     
   }
 
