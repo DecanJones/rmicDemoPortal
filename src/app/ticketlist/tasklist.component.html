@@ -2,53 +2,156 @@
 <div fxLayout="row wrap">
   <div fxFlex.gt-lg="70" fxFlex.gt-md="70" fxFlex.gt-xs="100" fxFlex="100">
       <mat-card>
-          <mat-card-content>
-            <mat-card-title>Recent Workflows</mat-card-title>
-            <div fxLayout="row wrap">
-              <!-- column -->
-              <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-card>
-                  <div class="box p-20 bg-info text-center cursor-pointer" (click)="btnCategoryClick('',0)">
-                    <h4 #workflow class="font-light text-white m-0">Workflow #1</h4>
-                    <h6 class="text-white m-0">4 tasks</h6>
-                  </div>
-                </mat-card>
-              </div>
-              <!-- column -->
-              <!-- column -->
-              <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-card>
-                  <div class="box p-20 bg-warning text-center cursor-pointer" (click)="btnCategoryClick('In Progress',1)">
-                    <h4 #workflow class="font-light text-white m-0">Workflow #2</h4>
-                    <h6 class="text-white m-0">4 tasks</h6>
-                  </div>
-                </mat-card>
-              </div>
-              <!-- column -->
-              <!-- column -->
-              <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-card>
-                  <div class="box p-20 bg-success text-center cursor-pointer" (click)="btnCategoryClick('Open',2)">
-                    <h4 class="font-light text-white m-0">Workflow #3</h4>
-                    <h6 class="text-white m-0">3 tasks</h6>
-                  </div>
-                </mat-card>
-              </div>
-              <!-- column -->
-              <!-- column -->
-              <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
-                <mat-card>
-                  <div class="box p-20 bg-danger text-center cursor-pointer" (click)="btnCategoryClick('Closed',3)">
-                    <h4 class="font-light text-white m-0">Workflow #4</h4>
-                    
-                    <h6 class="text-white m-0">1 tasks</h6>
-                  </div>
-                </mat-card>
-              </div>
-              <!-- column -->
-            </div>   
-            
-          </mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="Workflow #1">
+            <mat-card-content>
+              <mat-card-title>Task Metrics</mat-card-title>
+              <div fxLayout="row wrap">
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-info text-center cursor-pointer" (click)="btnCategoryClick('',0)">
+                      <h1 class="font-light text-white m-0">{{totalCount}}</h1>
+                      <h6 class="text-white m-0">Total Tickets</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-warning text-center cursor-pointer" (click)="btnCategoryClick('In Progress',1)">
+                      <h1 class="font-light text-white m-0">{{Inprogress}}</h1>
+                      <h6 class="text-white m-0">In Progress</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-success text-center cursor-pointer" (click)="btnCategoryClick('Open',2)">
+                      <h1 class="font-light text-white m-0">{{Open}}</h1>
+                      <h6 class="text-white m-0">Open</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-danger text-center cursor-pointer" (click)="btnCategoryClick('Closed',3)">
+                      <h1 class="font-light text-white m-0">{{Closed}}</h1>
+                      <h6 class="text-white m-0">Closed</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+              </div>   
+              
+            </mat-card-content>
+             </mat-tab>
+          <mat-tab label="Workflow #2"> 
+            <mat-card-content>
+              <mat-card-title>Task metrics</mat-card-title>
+               
+              <div fxLayout="row wrap">
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-info text-center cursor-pointer" (click)="btnCategoryClick('',0)">
+                      <h1 class="font-light text-white m-0">{{totalCount}}</h1>
+                      <h6 class="text-white m-0">Total Tickets</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-warning text-center cursor-pointer" (click)="btnCategoryClick('In Progress',1)">
+                      <h1 class="font-light text-white m-0">{{Inprogress}}</h1>
+                      <h6 class="text-white m-0">In Progress</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-success text-center cursor-pointer" (click)="btnCategoryClick('Open',2)">
+                      <h1 class="font-light text-white m-0">{{Open}}</h1>
+                      <h6 class="text-white m-0">Open</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-danger text-center cursor-pointer" (click)="btnCategoryClick('Closed',3)">
+                      <h1 class="font-light text-white m-0">{{Closed}}</h1>
+                      <h6 class="text-white m-0">Closed</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+              </div>   
+               
+              
+            </mat-card-content>
+             </mat-tab>
+          <mat-tab label="Workflow #3"> 
+            <mat-card-content>
+              <mat-card-title>Task Metrics</mat-card-title>
+               
+              <div fxLayout="row wrap">
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-info text-center cursor-pointer" (click)="btnCategoryClick('',0)">
+                      <h1 class="font-light text-white m-0">{{totalCount}}</h1>
+                      <h6 class="text-white m-0">Total Tickets</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-warning text-center cursor-pointer" (click)="btnCategoryClick('In Progress',1)">
+                      <h1 class="font-light text-white m-0">{{Inprogress}}</h1>
+                      <h6 class="text-white m-0">In Progress</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-success text-center cursor-pointer" (click)="btnCategoryClick('Open',2)">
+                      <h1 class="font-light text-white m-0">{{Open}}</h1>
+                      <h6 class="text-white m-0">Open</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+                <!-- column -->
+                <div fxFlex.gt-sm="25" fxFlex.gt-xs="100" fxFlex="100">
+                  <mat-card>
+                    <div class="box p-20 bg-danger text-center cursor-pointer" (click)="btnCategoryClick('Closed',3)">
+                      <h1 class="font-light text-white m-0">{{Closed}}</h1>
+                      <h6 class="text-white m-0">Closed</h6>
+                    </div>
+                  </mat-card>
+                </div>
+                <!-- column -->
+              </div>   
+              
+            </mat-card-content>
+             </mat-tab>
+        </mat-tab-group>
+          
       </mat-card>
       <div fxLayout="row wrap">
         <div fxFlex="100">
