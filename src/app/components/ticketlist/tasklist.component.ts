@@ -2,7 +2,17 @@ import { Component, OnInit, Inject, Optional, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as $ from 'jquery';
-import { SharedService } from '../shared-services';
+import { SharedService } from '../../services/shared-services';
+import {
+    CdkDrag,
+    CdkDragStart,
+    CdkDropList,
+    CdkDropListGroup,
+    CdkDragMove,
+    CdkDragEnter,
+    moveItemInArray
+  } from "@angular/cdk/drag-drop";
+  import { ViewportRuler } from "@angular/cdk/overlay";
 
 export interface TicketElement {
     id: number;
@@ -161,7 +171,8 @@ const tickets: TicketElement[] = [
 
 
 export class TasklistComponent implements OnInit {
-
+    @ViewChild(CdkDropListGroup) listGroup: CdkDropListGroup<CdkDropList>;
+    @ViewChild(CdkDropList) placeholder: CdkDropList;
     @ViewChild(MatTable, { static: true }) table: MatTable<any> = Object.create(null);
     searchText: any;
     totalCount = -1;
@@ -169,6 +180,7 @@ export class TasklistComponent implements OnInit {
     Inprogress = -1;
     Open = -1;
     sideBarOPen:boolean = false;
+    
     messages = [
         {
           from: 'Nirav joshi (nbj@gmail.com)',
@@ -213,7 +225,145 @@ export class TasklistComponent implements OnInit {
 ]
     dataSource = new MatTableDataSource(tickets);
 
-
+    public tickets: TicketElement[] = [
+        {
+            id: 77,
+            creator: 'Eric Pratt',
+            title: ' File upload ,Elegant Theme Side Menu show OnClick',
+            assignee: 'Alice Bohr',
+            status: 'In Progress',
+            labelbg: 'warning',
+            product: 'Elegant Admin',
+            date: '2018-05-01',
+            taskSteps:[{
+                type: "file",
+                steps: 3
+            }]
+           
+        },
+        {
+            id: 78,
+            creator: 'Steve',
+            title: 'Xtreme theme dropdown issue',
+            assignee: 'Jonathan',
+            status: 'Open',
+            labelbg: 'success',
+            product: 'Xtreme Admin',
+            date: '2018-05-03'
+        },
+        {
+            id: 79,
+            creator: 'Mark',
+            title: 'Header issue in material admin',
+            assignee: 'Smith J',
+            status: 'Closed',
+            labelbg: 'danger',
+            product: 'Material Admin',
+            date: '2018-05-02',
+            taskSteps:[{
+                type: "file",
+                steps: 3
+            }]
+        },
+        {
+            id: 80,
+            creator: 'John Doe',
+            title: 'Sidebar issue in Nice admin',
+            assignee: 'Vincent',
+            status: 'In Progress',
+            labelbg: 'warning',
+            product: 'Nice Admin',
+            date: '2018-05-06',
+            taskSteps:[{
+                type: "file",
+                steps: 3
+            }]
+        },
+        {
+            id: 81,
+            creator: 'Jennifer',
+            title: 'Elegant Theme Side Menu show OnClick',
+            assignee: 'Chris Martin',
+            status: 'Open',
+            labelbg: 'success',
+            product: 'Elagant Admin',
+            date: '2018-05-04',
+            taskSteps:[{
+                type: "file",
+                steps: 3
+            }]
+        },
+        {
+            id: 82,
+            creator: 'Harper',
+            title: 'Header issue in admin pro admin',
+            assignee: 'James F',
+            status: 'Closed',
+            labelbg: 'danger',
+            product: 'Adminpro Admin',
+            date: '2018-05-03',
+            taskSteps:[{
+                type: "file",
+                steps: 3
+            }]
+        },
+        {
+            id: 83,
+            creator: 'Billy John',
+            title: 'Elegant Theme Side Menu OnClick',
+            assignee: 'Jonathan',
+            status: 'In Progress',
+            labelbg: 'warning',
+            product: 'Elegant Admin',
+            date: '2018-05-05',
+            taskSteps:[{
+                type: "file",
+                steps: 3
+            }]
+        },
+        {
+            id: 84,
+            creator: 'Allen Brook',
+            title: 'adminpress Theme Side Menu not opening',
+            assignee: 'Smith J',
+            status: 'Open',
+            labelbg: 'success',
+            product: 'Adminpress Admin',
+            date: '2018-05-04',
+            taskSteps:[{
+                type: "file",
+                steps: 3
+            }]
+        },
+        {
+            id: 85,
+            creator: 'Olivia Hart',
+            title: 'Charts not proper in xtreme admin',
+            assignee: 'Markus',
+            status: 'Closed',
+            labelbg: 'danger',
+            product: 'Xtreme Admin',
+            date: '2018-05-02',
+            taskSteps:[{
+                type: "file",
+                steps: 3
+            }]
+        },
+        {
+            id: 86,
+            creator: 'Luis Orys',
+            title: 'Psd not availabel with package',
+            assignee: 'Jane',
+            status: 'Closed',
+            labelbg: 'danger',
+            product: 'Material Admin',
+            date: '2018-05-03',
+            taskSteps:[{
+                type: "file",
+                steps: 3
+            }]
+        }
+    ];
     constructor(public dialog: MatDialog,private sharedService:SharedService) { }
 
     ngOnInit() {
@@ -259,22 +409,6 @@ export class TasklistComponent implements OnInit {
         
     }
 
-    openDialog(action: string, obj: any) {
-        obj.action = action;
-        const dialogRef = this.dialog.open(TicketDialogContent, {
-            data: obj
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result.event === 'Add') {
-                this.addRowData(result.data);
-            } else if (result.event === 'Update') {
-                this.updateRowData(result.data);
-            } else if (result.event === 'Delete') {
-                this.deleteRowData(result.data);
-            }
-        });
-    }
 
     addRowData(row_obj: TicketElement) {
         const d = new Date();
@@ -316,31 +450,3 @@ export class TasklistComponent implements OnInit {
 
 }
 
-@Component({
-    // tslint:disable-next-line: component-selector
-    selector: 'dialog-content',
-    templateUrl: 'dialog-content.html',
-})
-// tslint:disable-next-line: component-class-suffix
-export class TicketDialogContent {
-    action: string;
-    local_data: any;
-
-    constructor(
-        public dialogRef: MatDialogRef<TicketDialogContent>,
-        // @Optional() is used to prevent error if no data is passed
-        @Optional() @Inject(MAT_DIALOG_DATA) public data: TicketElement) {
-        //  console.log(data);
-        this.local_data = { ...data };
-        this.action = this.local_data.action;
-    }
-
-    doAction() {
-        this.dialogRef.close({ event: this.action, data: this.local_data });
-    }
-
-    closeDialog() {
-        this.dialogRef.close({ event: 'Cancel' });
-    }
-
-}

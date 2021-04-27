@@ -19,7 +19,7 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
-import { TasklistComponent } from './ticketlist/tasklist.component';
+import { TasklistComponent } from './components/ticketlist/tasklist.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -28,10 +28,12 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { QuillModule } from "ngx-quill";
-import { SharedService } from './shared-services';
-import { TextEditorComponent } from '../text-editor/text-editor.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
+import { SharedService } from './services/shared-services';
+import { TextEditorComponent } from './components/text-editor/text-editor.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
+import { MyAppComponent } from './my-app/my-app.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -56,7 +58,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TasklistComponent,
     AppBreadcrumbComponent,
     TextEditorComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    MyAppComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxContentLoadingModule,
     FlexLayoutModule,
     CalendarModule,
+    DragDropModule,
     PerfectScrollbarModule,
     QuillModule.forRoot(),
     HttpClientModule,

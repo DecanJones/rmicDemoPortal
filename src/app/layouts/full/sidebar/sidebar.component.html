@@ -36,6 +36,7 @@
         <mat-step  *ngFor="let activity of stepperSteps;let i = index"  label="{{activity}}" >
             <button (click)="clickEvent(i)"></button>
         </mat-step>
+        
         <!-- <mat-step label="Upload document">
           {{stepperSteps}}
           </mat-step>

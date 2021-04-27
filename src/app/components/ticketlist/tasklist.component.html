@@ -174,8 +174,8 @@
       <mat-card>
           <mat-card-content>
               <mat-card-title>Complete task details</mat-card-title>
-              <div class="table-responsive">
-                <table mat-table [dataSource]="dataSource" class="table  ticket-list no-wrap" [routerLink]="['/taskdetails']">
+               <div class="table-responsive">
+                <table mat-table [dataSource]="dataSource" class="table  ticket-list no-wrap" >
       
       
       
@@ -215,10 +215,10 @@
                   <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> Action </th>
                     <td mat-cell *matCellDef="let element" class="action-link">
-                      <a (click)="openDialog('Update',element)" class="m-r-10 cursor-pointer"><i class="fa fa-pencil"></i></a>
+                      <!-- <a (click)="openDialog('Update',element)" class="m-r-10 cursor-pointer"><i class="fa fa-pencil"></i></a>
                       <a (click)="openDialog('Delete',element)" class="m-r-10 cursor-pointer">
                         <i class="fa fa-trash text-danger"></i>
-                      </a>
+                      </a> -->
                     </td>
                   </ng-container>
       
@@ -226,6 +226,32 @@
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
               </div>
+              <!-- <div class="d-flex flex-row comment-row" *ngFor="let mycomment of tickets">
+                <div class="p-2">
+                    <span class="round">
+                        <img src="{{mycomment.profile}}" alt="user" width="50">
+                    </span>
+                </div>
+                <div class="comment-text w-100 p-t-0">
+                    <h5 class="m-0">{{mycomment.creator}}</h5>
+                    <p class="m-b-5 m-t-5">{{mycomment.title}}</p>
+                    <div class="comment-footer">
+                        <span class="text-muted pull-right">{{mycomment.date}}</span>
+                        <span class="label label-{{mycomment.class}} float-left">{{mycomment.status}}</span>
+                        <span class="action-icons">
+                            <a href="javascript:void(0)">
+                                <i class="ti-pencil-alt"></i>
+                            </a>
+                            <a href="javascript:void(0)">
+                                <i class="ti-check"></i>
+                            </a>
+                            <a href="javascript:void(0)">
+                                <i class="ti-heart"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div> -->
           </mat-card-content>
       </mat-card>
       <!-- <mat-card>

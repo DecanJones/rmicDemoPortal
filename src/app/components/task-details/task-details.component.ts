@@ -2,9 +2,9 @@ import { Component, AfterViewInit, ComponentFactoryResolver, ViewChild, ViewCont
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from 'ngx-custom-validators';
-import { TextEditorComponent } from 'src/text-editor/text-editor.component';
+import { TextEditorComponent } from 'src/app/components/text-editor/text-editor.component';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
-import { SharedService } from '../shared-services';
+import { SharedService } from '../../services/shared-services';
 
 const password = new FormControl('', Validators.required);
 const confirmPassword = new FormControl('', CustomValidators.equalTo(password));

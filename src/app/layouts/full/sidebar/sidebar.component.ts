@@ -8,7 +8,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 
 
 import { MenuItems } from '../../../shared/menu-items/menu-items';
-import { SharedService } from 'src/app/shared-services';
+import { SharedService } from 'src/app/services/shared-services';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',

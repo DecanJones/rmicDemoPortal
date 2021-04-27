@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
-import { TasklistComponent as TasklistComponent } from './ticketlist/tasklist.component';
+import { TasklistComponent as TasklistComponent } from './components/ticketlist/tasklist.component';
 
 
 export const AppRoutes: Routes = [
@@ -22,8 +22,8 @@ export const AppRoutes: Routes = [
                 loadChildren: () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
             },
             {
-                path: 'taskdetails',
-                loadChildren: () => import('./task-details/task-details.module').then(m => m.StarterModule)
+                path: 'taskdetails/:id',
+                loadChildren: () => import('./components/task-details/task-details.module').then(m => m.StarterModule)
             },
             {
                 path: 'tasklist',
