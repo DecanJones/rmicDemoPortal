@@ -267,30 +267,6 @@
       </mat-card> -->
   </div>
   <div fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="70" fxFlex="70">
-      <mat-card>
-          <mat-card-content>
-            <mat-card-title>Calendar</mat-card-title>
-          </mat-card-content>
-          <mat-card-content class="bg-light">
-              <ejs-calendar></ejs-calendar>
-          </mat-card-content>
-       
-      </mat-card>
-      <mat-card>
-        
-          
-      </mat-card>
-      <mat-card>
-        <mat-card-content>
-          <mat-card-title>RSS Feed</mat-card-title>
-          <mat-card-subtitle>A selection of cool informative links</mat-card-subtitle>
-          <mat-list>
-            <mat-list-item *ngFor="let message of messages">
-              <h3 matLine>{{message.from}}</h3>
-              <p matLine class="text-muted">{{message.content}}</p>
-            </mat-list-item>
-          </mat-list>
-      </mat-card-content>
-      </mat-card>
-  </div>
+ <my-app></my-app>
+  
 </div>

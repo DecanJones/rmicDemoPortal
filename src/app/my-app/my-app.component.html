@@ -1,9 +1,8 @@
-<div class="example-box" cdkDragLockAxis="x" cdkDrag>
-  <mat-card-content class="bg-light">
-    <ejs-calendar></ejs-calendar>
-</mat-card-content>
-</div>
-
-<div class="example-box" cdkDragLockAxis="x" cdkDrag>
-  I can only be dragged left/right
+<div class="example-boundary">
+  <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
+  <ejs-calendar></ejs-calendar>
+  </div>
+   <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
+    I can only be dragged within the dotted container
+  </div>
 </div>

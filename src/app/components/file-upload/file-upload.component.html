@@ -1,12 +1,7 @@
-<ngx-content-loading [width]="300" [hidden]="contentLoaded()">
-    <svg:g ngx-rect width="600" height="10" y="10" x="70" rx="5" ry="5"></svg:g>
-    <svg:g ngx-rect width="800" height="10" y="40" x="70" rx="5" ry="5"></svg:g>
-    <svg:g ngx-rect width="800" height="10" y="70" x="0" rx="5" ry="5"></svg:g>
-    <svg:g ngx-rect width="800" height="10" y="100" x="0" rx="5" ry="5"></svg:g>
-</ngx-content-loading>
+
 
 <div>
-    <form [formGroup]="form" [hidden]="!contentLoaded()">
+    <form [formGroup]="form" >
 
         <div fxLayout="row wrap">
           <div class="p-10" fxFlex.gt-sm="50" fxFlex.gt-xs="50" fxFlex="100">

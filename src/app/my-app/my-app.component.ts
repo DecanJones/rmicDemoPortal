@@ -11,15 +11,40 @@ import {
 } from "@angular/cdk/drag-drop";
 import { ViewportRuler } from "@angular/cdk/overlay";
 
+
+
 @Component({
   selector: "my-app",
   templateUrl: "./my-app.component.html",
   styleUrls: ["./my-app.component.scss"]
 })
+
+
 export class MyAppComponent {
   @ViewChild(CdkDropListGroup) listGroup: CdkDropListGroup<CdkDropList>;
   @ViewChild(CdkDropList) placeholder: CdkDropList;
 
+  
+  messages = [
+    {
+      from: 'Nirav joshi (nbj@gmail.com)',
+      image: 'assets/images/users/1.jpg',
+      subject: 'Material angular',
+      content: 'This is the material angular template'
+    },
+    {
+      from: 'Sunil joshi (sbj@gmail.com)',
+      image: 'assets/images/users/2.jpg',
+      subject: 'Wrappixel',
+      content: 'We have wrappixel launched'
+    },
+    {
+      from: 'Vishal Bhatt (bht@gmail.com)',
+      image: 'assets/images/users/3.jpg',
+      subject: 'Task list',
+      content: 'This is the latest task hasbeen done'
+    }
+  ];
   public items: Array<number> = [1, 2];
 
   public target: CdkDropList;
@@ -61,7 +86,21 @@ export class MyAppComponent {
       }
     });
   }
+  movies = [
+    'Episode I - The Phantom Menace',
+    'Episode II - Attack of the Clones',
+    'Episode III - Revenge of the Sith',
+    'Episode IV - A New Hope',
+    'Episode V - The Empire Strikes Back',
+    'Episode VI - Return of the Jedi',
+    'Episode VII - The Force Awakens',
+    'Episode VIII - The Last Jedi',
+    'Episode IX – The Rise of Skywalker'
+  ];
 
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+  }
   dropListDropped() {
     if (!this.target) return;
 
