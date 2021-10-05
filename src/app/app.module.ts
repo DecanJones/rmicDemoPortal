@@ -33,7 +33,21 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { MyAppComponent } from './my-app/my-app.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component'
+import {HeroDetailComponent} from './components/hero-detail/hero-detail.component'
+import {HeroesComponent} from './components/heroes/heroes.component'
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { HeroSearchComponent } from './components/hero-search/hero-search.component';
+import { HeroService } from './services/hero.service';
+import { MessageService } from './services/message.service';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api/http-client-in-memory-web-api.module';
+import { InMemoryDataService } from './services/in-memory-data.service';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { heroReducer } from './entities/heroes/hero-reducer';
+import { HeroEffects } from './entities/heroes/hero-effects';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -59,7 +73,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppBreadcrumbComponent,
     TextEditorComponent,
     FileUploadComponent,
-    MyAppComponent
+    MyAppComponent,
+    DashboardComponent,
+    HeroDetailComponent,
+    HeroSearchComponent,
+    HeroesComponent
   ],
   imports: [
     BrowserModule,
@@ -73,11 +91,22 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CalendarModule,
     DragDropModule,
     PerfectScrollbarModule,
+    NgApexchartsModule,
     QuillModule.forRoot(),
     HttpClientModule,
     SharedModule,
     
     RouterModule.forRoot(AppRoutes),
+       // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('heroes', heroReducer),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature([HeroEffects]),
 
     HttpClientModule,
     TranslateModule.forRoot({
@@ -91,6 +120,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   providers: [
     SharedService,
+    HeroService,
+    MessageService,
     AuthGuard,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

@@ -1,19 +1,43 @@
-import { Component, OnInit, Inject, Optional, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import * as $ from 'jquery';
-import { SharedService } from '../../services/shared-services';
-import {
-    CdkDrag,
-    CdkDragStart,
-    CdkDropList,
-    CdkDropListGroup,
-    CdkDragMove,
-    CdkDragEnter,
-    moveItemInArray
-  } from "@angular/cdk/drag-drop";
-  import { ViewportRuler } from "@angular/cdk/overlay";
+import { Component, OnInit, ViewChild } from '@angular/core';
 
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexYAxis,
+  ApexStroke,
+  ApexTooltip,
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexResponsive,
+  ApexLegend,
+  ApexFill,
+} from 'ng-apexcharts';
+
+export type barChartOptions = {
+    series: ApexAxisChartSeries;
+    chart: ApexChart;
+    dataLabels: ApexDataLabels;
+    plotOptions: ApexPlotOptions;
+    responsive: ApexResponsive[];
+    xaxis: ApexXAxis;
+    legend: ApexLegend;
+    fill: ApexFill;
+  };
+  
+  export type areaChartOptions = {
+    series: ApexAxisChartSeries;
+    chart: ApexChart;
+    xaxis: ApexXAxis;
+    yaxis: ApexYAxis;
+    stroke: ApexStroke;
+    tooltip: ApexTooltip;
+    dataLabels: ApexDataLabels;
+    legend: ApexLegend;
+    colors: string[];
+  };
+  
 export interface TicketElement {
     id: number;
     creator: string;
@@ -25,6 +49,11 @@ export interface TicketElement {
     date: string;
     taskSteps?:any[]
 }
+
+export interface Hero {
+    id: number;
+    name: string;
+  }
 
 const tickets: TicketElement[] = [
     {
@@ -169,284 +198,154 @@ const tickets: TicketElement[] = [
     templateUrl: './tasklist.component.html'
 })
 
-
 export class TasklistComponent implements OnInit {
-    @ViewChild(CdkDropListGroup) listGroup: CdkDropListGroup<CdkDropList>;
-    @ViewChild(CdkDropList) placeholder: CdkDropList;
-    @ViewChild(MatTable, { static: true }) table: MatTable<any> = Object.create(null);
-    searchText: any;
-    totalCount = -1;
-    Closed = -1;
-    Inprogress = -1;
-    Open = -1;
-    sideBarOPen:boolean = false;
-    
-    messages = [
-        {
-          from: 'Nirav joshi (nbj@gmail.com)',
-          image: 'assets/images/users/1.jpg',
-          subject: 'Material angular',
-          content: 'This is the material angular template'
-        },
-        {
-          from: 'Sunil joshi (sbj@gmail.com)',
-          image: 'assets/images/users/2.jpg',
-          subject: 'Wrappixel',
-          content: 'We have wrappixel launched'
-        },
-        {
-          from: 'Vishal Bhatt (bht@gmail.com)',
-          image: 'assets/images/users/3.jpg',
-          subject: 'Task list',
-          content: 'This is the latest task hasbeen done'
-        }
-      ];
-    
-    displayedColumns: string[] = ['creator', 'title', 'assignee', 'status', 'product', 'date', 'action'];
-    workflow:any[] = [ {
-        workflow: "workflow #1",
-        style: "bg-info",
-        taskSteps:["file upload", "project description", "additional comments"]
-    },
-    {
-        workflow: "workflow #2",
-        style: "bg-warning",
-        taskSteps:["file upload", "project description", "additional comments"]
-    },{
-        workflow: "workflow #3",
-        style: "bg-success",
-        taskSteps:["project description", "additional comments"]
-    },
-    {
-        workflow: "workflow #4",
-        style: "bg-danger",
-        taskSteps:["file upload"]
-    }
-]
-    dataSource = new MatTableDataSource(tickets);
-
-    public tickets: TicketElement[] = [
-        {
-            id: 77,
-            creator: 'Eric Pratt',
-            title: ' File upload ,Elegant Theme Side Menu show OnClick',
-            assignee: 'Alice Bohr',
-            status: 'In Progress',
-            labelbg: 'warning',
-            product: 'Elegant Admin',
-            date: '2018-05-01',
-            taskSteps:[{
-                type: "file",
-                steps: 3
-            }]
-           
-        },
-        {
-            id: 78,
-            creator: 'Steve',
-            title: 'Xtreme theme dropdown issue',
-            assignee: 'Jonathan',
-            status: 'Open',
-            labelbg: 'success',
-            product: 'Xtreme Admin',
-            date: '2018-05-03'
-        },
-        {
-            id: 79,
-            creator: 'Mark',
-            title: 'Header issue in material admin',
-            assignee: 'Smith J',
-            status: 'Closed',
-            labelbg: 'danger',
-            product: 'Material Admin',
-            date: '2018-05-02',
-            taskSteps:[{
-                type: "file",
-                steps: 3
-            }]
-        },
-        {
-            id: 80,
-            creator: 'John Doe',
-            title: 'Sidebar issue in Nice admin',
-            assignee: 'Vincent',
-            status: 'In Progress',
-            labelbg: 'warning',
-            product: 'Nice Admin',
-            date: '2018-05-06',
-            taskSteps:[{
-                type: "file",
-                steps: 3
-            }]
-        },
-        {
-            id: 81,
-            creator: 'Jennifer',
-            title: 'Elegant Theme Side Menu show OnClick',
-            assignee: 'Chris Martin',
-            status: 'Open',
-            labelbg: 'success',
-            product: 'Elagant Admin',
-            date: '2018-05-04',
-            taskSteps:[{
-                type: "file",
-                steps: 3
-            }]
-        },
-        {
-            id: 82,
-            creator: 'Harper',
-            title: 'Header issue in admin pro admin',
-            assignee: 'James F',
-            status: 'Closed',
-            labelbg: 'danger',
-            product: 'Adminpro Admin',
-            date: '2018-05-03',
-            taskSteps:[{
-                type: "file",
-                steps: 3
-            }]
-        },
-        {
-            id: 83,
-            creator: 'Billy John',
-            title: 'Elegant Theme Side Menu OnClick',
-            assignee: 'Jonathan',
-            status: 'In Progress',
-            labelbg: 'warning',
-            product: 'Elegant Admin',
-            date: '2018-05-05',
-            taskSteps:[{
-                type: "file",
-                steps: 3
-            }]
-        },
-        {
-            id: 84,
-            creator: 'Allen Brook',
-            title: 'adminpress Theme Side Menu not opening',
-            assignee: 'Smith J',
-            status: 'Open',
-            labelbg: 'success',
-            product: 'Adminpress Admin',
-            date: '2018-05-04',
-            taskSteps:[{
-                type: "file",
-                steps: 3
-            }]
-        },
-        {
-            id: 85,
-            creator: 'Olivia Hart',
-            title: 'Charts not proper in xtreme admin',
-            assignee: 'Markus',
-            status: 'Closed',
-            labelbg: 'danger',
-            product: 'Xtreme Admin',
-            date: '2018-05-02',
-            taskSteps:[{
-                type: "file",
-                steps: 3
-            }]
-        },
-        {
-            id: 86,
-            creator: 'Luis Orys',
-            title: 'Psd not availabel with package',
-            assignee: 'Jane',
-            status: 'Closed',
-            labelbg: 'danger',
-            product: 'Material Admin',
-            date: '2018-05-03',
-            taskSteps:[{
-                type: "file",
-                steps: 3
-            }]
-        }
+    @ViewChild('chart') chart: ChartComponent;
+    public barChartOptions: Partial<barChartOptions>;
+    public areaChartOptions: Partial<areaChartOptions>;
+    constructor() {}
+  
+    // Doughnut chart start
+    public doughnutChartLabels: string[] = [
+      'Development',
+      'Java Classes',
+      'Painting ',
+      'Geography Class',
     ];
-    constructor(public dialog: MatDialog,private sharedService:SharedService) { }
-
+    public doughnutChartData: number[] = [32, 25, 20, 23];
+    public doughnutChartColors: any[] = [
+      {
+        backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8'],
+      },
+    ];
+  
+    public doughnutChartType = 'doughnut';
+    public doughnutChartOptions: any = {
+      animation: false,
+      responsive: true,
+      maintainAspectRatio: false,
+      cutoutPercentage: 70,
+      legend: {
+        display: false,
+      },
+    };
+  
+    // Doughnut chart end
+  
     ngOnInit() {
-        this.totalCount = this.dataSource.data.length;
-        document.getElementById("navMenu")?.click()
-        this.Open = this.btnCategoryClick('Open',1);
-        this.Closed = this.btnCategoryClick('Closed',2);
-        this.Inprogress = this.btnCategoryClick('In Progress',3);
-        this.dataSource = new MatTableDataSource(tickets);
-        
+      this.chart1();
+      this.chart2();
     }
-
-    clickMe(any:any,num:number){
-       
-        this.sharedService.emitChangeWorkflow(this.workflow[num])    
-        switch (any) {
-            case 'Open':
-                this.sharedService.emitChange(this.workflow[0].taskSteps)
-              break;
-            case 'In Progress':
-                this.sharedService.emitChange(this.workflow[1].taskSteps)
-              break;
-            case 'Closed':
-                this.sharedService.emitChange(this.workflow[2].taskSteps)
-                break;
-            default:
-                this.sharedService.emitChange(this.workflow[3].taskSteps)
-                break;
-                   
-               
-          }
-          
+  
+    private chart1() {
+      this.areaChartOptions = {
+        series: [
+          {
+            name: 'Mathes',
+            data: [31, 40, 28, 51, 42, 85, 77],
+          },
+          {
+            name: 'Science',
+            data: [11, 32, 45, 32, 34, 52, 41],
+          },
+        ],
+        chart: {
+          height: 350,
+          type: 'area',
+          toolbar: {
+            show: false,
+          },
+          foreColor: '#9aa0ac',
+        },
+        colors: ['#F77A9A', '#A054F7'],
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          curve: 'smooth',
+        },
+        xaxis: {
+          categories: [
+            'test 1',
+            'test 2',
+            'test 3',
+            'test 4',
+            'test 5',
+            'test 6',
+            'test 7',
+          ],
+        },
+        legend: {
+          show: true,
+          position: 'top',
+          horizontalAlign: 'center',
+          offsetX: 0,
+          offsetY: 0,
+        },
+      };
     }
-    
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
+  
+    private chart2() {
+      this.barChartOptions = {
+        series: [
+          {
+            name: 'Physics',
+            data: [44, 55, 41, 67, 22, 43],
+          },
+          {
+            name: 'Computer',
+            data: [13, 23, 20, 8, 13, 27],
+          },
+          {
+            name: 'Management',
+            data: [11, 17, 15, 15, 21, 14],
+          },
+          {
+            name: 'Mathes',
+            data: [21, 7, 25, 13, 22, 8],
+          },
+        ],
+        chart: {
+          type: 'bar',
+          height: 330,
+          foreColor: '#9aa0ac',
+          stacked: true,
+          toolbar: {
+            show: false,
+          },
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              legend: {
+                position: 'bottom',
+                offsetX: -10,
+                offsetY: 0,
+              },
+            },
+          },
+        ],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '20%',
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        xaxis: {
+          type: 'category',
+          categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        },
+        legend: {
+          show: false,
+        },
+        fill: {
+          opacity: 1,
+          colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
+        },
+      };
     }
-
-    btnCategoryClick(val: string, num:number) {
-        this.dataSource.filter = val.trim().toLowerCase();
-       this.clickMe(val, num);
-        return this.dataSource.filteredData.length;
-        
-    }
-
-
-    addRowData(row_obj: TicketElement) {
-        const d = new Date();
-        this.dataSource.data.push({
-            id: d.getTime(),
-            creator: row_obj.creator,
-            title: row_obj.title,
-            assignee: row_obj.assignee,
-            status: row_obj.status,
-            labelbg: row_obj.labelbg,
-            product: row_obj.product,
-            date: row_obj.date,
-        });
-        this.table.renderRows();
-
-    }
-
-    updateRowData(row_obj: TicketElement) {
-        this.dataSource.data = this.dataSource.data.filter((value, key) => {
-            if (value.id === row_obj.id) {
-                value.creator = row_obj.creator;
-                value.title = row_obj.title;
-                value.assignee = row_obj.assignee;
-                value.status = row_obj.status;
-                value.labelbg = row_obj.labelbg;
-                value.product = row_obj.product;
-                value.date = row_obj.date;
-            }
-            return true;
-        });
-    }
-
-    deleteRowData(row_obj: TicketElement) {
-        this.dataSource.data = this.dataSource.data.filter((value, key) => {
-            return value.id !== row_obj.id;
-        });
-    }
-
-
-}
-
+  }
+  

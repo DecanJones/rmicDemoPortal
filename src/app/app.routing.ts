@@ -3,14 +3,17 @@ import { Routes } from '@angular/router';
 import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
-import { TasklistComponent as TasklistComponent } from './components/ticketlist/tasklist.component';
+import { TasklistComponent } from './components/ticketlist/tasklist.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
+import { HeroesComponent } from './components/heroes/heroes.component';
 
 
 export const AppRoutes: Routes = [
     {
         path: '',
         component: FullComponent,
-        canActivate: [AuthGuard],
+        canActivate: [],
         children: [
             {
                 path: '',
@@ -25,6 +28,7 @@ export const AppRoutes: Routes = [
                 path: 'taskdetails/:id',
                 loadChildren: () => import('./components/task-details/task-details.module').then(m => m.StarterModule)
             },
+            
             {
                 path: 'tasklist',
                 component: TasklistComponent,
@@ -40,6 +44,9 @@ export const AppRoutes: Routes = [
 
         ]
     },
+    { path: 'dashboard', component: DashboardComponent },
+            { path: 'detail/:id', component: HeroDetailComponent },
+            { path: 'heroes', component: HeroesComponent },
     {
         path: 'login',
         component: LoginComponent,

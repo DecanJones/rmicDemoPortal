@@ -1,10 +1,13 @@
-import { Component, AfterViewInit, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, AfterViewInit, OnInit,ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from 'ngx-custom-validators';
 import { TextEditorComponent } from 'src/app/components/text-editor/text-editor.component';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { SharedService } from '../../services/shared-services';
+import { HeroService } from 'src/app/services/hero.service';
+import { selectAllHeroes, getSelectedHero } from '../../entities/heroes/hero-reducer';
+import { Store } from '@ngrx/store';
 
 const password = new FormControl('', Validators.required);
 const confirmPassword = new FormControl('', CustomValidators.equalTo(password));
@@ -22,9 +25,18 @@ export class TaskDetailsComponent  {
 
   public componentRef:any
   public form: FormGroup = Object.create(null);
+  public hero:any
   ngAfterViewInit() {
     //nav hack
     document.getElementById("navMenu")?.click();
+  }
+
+
+
+  getHeroes(): void {
+    this.store.select(selectAllHeroes).subscribe(heroes=>{
+    this.hero = heroes.slice(0,4);
+    });
   }
   
 
@@ -44,15 +56,25 @@ export class TaskDetailsComponent  {
   }
   constructor(private fb: FormBuilder,
               private resolver: ComponentFactoryResolver,
+              private store:Store<any>,
+              private heroService: HeroService,
               private sharedService:SharedService){
                 
                 this.sharedService.changedTaskEmitted$.subscribe((event)=> {
                   this.createComponent(event);
                 })
+
+                this.heroService.test();
+
+                this.store.select(selectAllHeroes).subscribe(heroes=>{
+                  this.hero = heroes.find(hero => hero.id == 13);
+                  console.log("butt juice ", heroes)
+                });
             
               }
 
   ngOnInit() {
+    this.heroService.getHeroes();
     this.form = this.fb.group({
       fname: [
         null,
